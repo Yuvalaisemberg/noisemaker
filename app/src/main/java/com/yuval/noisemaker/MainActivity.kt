@@ -19,9 +19,13 @@ class MainActivity : AppCompatActivity() {
         for (x in 1..8) {
             val line = LinearLayout(this)
             line.orientation = LinearLayout.HORIZONTAL
+            line.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
             for (y in 1..8) {
                 val square = View(this)
-                square.layoutParams = LinearLayout.LayoutParams(55, 50)
+                square.layoutParams = LinearLayout.LayoutParams(0, 50, 1F)
                 square.setBackgroundColor(0xFFFF0000.toInt())
                 line.addView(square)
             }
