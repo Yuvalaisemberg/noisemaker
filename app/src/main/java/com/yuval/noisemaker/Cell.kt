@@ -2,6 +2,7 @@ package com.yuval.noisemaker
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.widget.RelativeLayout
 
 class Cell @JvmOverloads constructor(
@@ -10,5 +11,10 @@ class Cell @JvmOverloads constructor(
 
     init {
         inflate(context, R.layout.cell, this)
+        setOnClickListener { onClick() }
+    }
+
+    private fun onClick() {
+        findViewById<View>(R.id.square).setBackgroundColor(0xffff0000.toInt())
     }
 }
