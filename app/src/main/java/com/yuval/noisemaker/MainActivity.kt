@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun createGrid() {
         val grid = findViewById<LinearLayout>(R.id.grid_container)
-        for (x in 1..8) {
+        for (x in 0..7) {
             val line = LinearLayout(this)
             line.orientation = LinearLayout.HORIZONTAL
             line.layoutParams = LinearLayout.LayoutParams(
@@ -24,9 +24,10 @@ class MainActivity : AppCompatActivity() {
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
             for (y in 1..8) {
-                val square = Cell(this)
-                square.layoutParams = LinearLayout.LayoutParams(0, 200, 1F)
-                line.addView(square)
+                val cell = Cell(this)
+                cell.index = x
+                cell.layoutParams = LinearLayout.LayoutParams(0, 200, 1F)
+                line.addView(cell)
             }
             grid.addView(line)
         }

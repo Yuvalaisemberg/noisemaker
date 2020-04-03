@@ -10,6 +10,7 @@ class Cell @JvmOverloads constructor(
 ) : RelativeLayout(context, attrs, defStyleAttr) {
 
     private var state: CellState = CellState.Off
+    var index: Int = 0
 
     init {
         inflate(context, R.layout.cell, this)
@@ -18,8 +19,11 @@ class Cell @JvmOverloads constructor(
 
     private fun onClick() {
         state = if (state == CellState.Off) CellState.On else CellState.Off
-        
+
         refreshState()
+        if (state==CellState.On) {
+            play()
+        }
     }
 
     private fun refreshState() {
@@ -29,6 +33,19 @@ class Cell @JvmOverloads constructor(
         }
         findViewById<View>(R.id.square).setBackgroundColor(color)
 
+    }
+
+    private fun play() {
+        when (index) {
+            0 -> Sound.play(context, Sound.SoundFile.a_0)
+            1 -> Sound.play(context, Sound.SoundFile.a_1)
+            2 -> Sound.play(context, Sound.SoundFile.a_2)
+            3 -> Sound.play(context, Sound.SoundFile.a_3)
+            4 -> Sound.play(context, Sound.SoundFile.a_4)
+            5 -> Sound.play(context, Sound.SoundFile.a_5)
+            6 -> Sound.play(context, Sound.SoundFile.a_6)
+            7 -> Sound.play(context, Sound.SoundFile.a_7)
+        }
     }
 
     enum class CellState {
