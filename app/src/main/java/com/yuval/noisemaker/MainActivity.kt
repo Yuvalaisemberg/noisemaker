@@ -17,12 +17,15 @@ class MainActivity : AppCompatActivity() {
     private fun createGrid() {
         val grid = findViewById<LinearLayout>(R.id.grid_container)
         for (x in 1..8) {
-            val square = View(this)
-            square.layoutParams = LinearLayout.LayoutParams(55, 50)
-            square.setBackgroundColor(0xFFFF0000.toInt())
-            grid.addView(square)
-
+            val line = LinearLayout(this)
+            line.orientation = LinearLayout.HORIZONTAL
+            for (y in 1..8) {
+                val square = View(this)
+                square.layoutParams = LinearLayout.LayoutParams(55, 50)
+                square.setBackgroundColor(0xFFFF0000.toInt())
+                line.addView(square)
+            }
+            grid.addView(line)
         }
-
     }
 }
