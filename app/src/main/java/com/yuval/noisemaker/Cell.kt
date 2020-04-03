@@ -4,6 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class Cell @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -21,7 +24,7 @@ class Cell @JvmOverloads constructor(
         state = if (state == CellState.Off) CellState.On else CellState.Off
 
         refreshState()
-        if (state==CellState.On) {
+        if (state == CellState.On) {
             play()
         }
     }
@@ -36,15 +39,8 @@ class Cell @JvmOverloads constructor(
     }
 
     private fun play() {
-        when (index) {
-            0 -> Sound.play(context, Sound.SoundFile.a_0)
-            1 -> Sound.play(context, Sound.SoundFile.a_1)
-            2 -> Sound.play(context, Sound.SoundFile.a_2)
-            3 -> Sound.play(context, Sound.SoundFile.a_3)
-            4 -> Sound.play(context, Sound.SoundFile.a_4)
-            5 -> Sound.play(context, Sound.SoundFile.a_5)
-            6 -> Sound.play(context, Sound.SoundFile.a_6)
-            7 -> Sound.play(context, Sound.SoundFile.a_7)
+        GlobalScope.launch {
+            Sound.play(index)
         }
     }
 
