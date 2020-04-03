@@ -24,9 +24,8 @@ class MainActivity : AppCompatActivity() {
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
             for (y in 1..8) {
-                val square = View(this)
-                square.layoutParams = LinearLayout.LayoutParams(0, 50, 1F)
-                square.setBackgroundColor(0xFFFF0000.toInt())
+                val square = Cell(this)
+                square.layoutParams = LinearLayout.LayoutParams(0, 200, 1F)
                 line.addView(square)
             }
             grid.addView(line)
