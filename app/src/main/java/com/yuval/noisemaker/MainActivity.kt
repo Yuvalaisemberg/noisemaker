@@ -16,19 +16,20 @@ class MainActivity : AppCompatActivity() {
     private fun createGrid() {
         val grid = findViewById<LinearLayout>(R.id.grid_container)
         for (x in 0..7) {
-            val line = LinearLayout(this)
-            line.orientation = LinearLayout.HORIZONTAL
-            line.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
+            val column = LinearLayout(this)
+            column.orientation = LinearLayout.VERTICAL
+            column.layoutParams = LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                1F
             )
-            for (y in 1..8) {
+            for (y in 1..14) {
                 val cell = Cell(this)
-                cell.index = x
-                cell.layoutParams = LinearLayout.LayoutParams(0, 200, 1F)
-                line.addView(cell)
+                cell.index = y
+                cell.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 120)
+                column.addView(cell)
             }
-            grid.addView(line)
+            grid.addView(column)
         }
     }
 }
