@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class Cell @JvmOverloads constructor(
@@ -35,12 +34,11 @@ class Cell @JvmOverloads constructor(
             CellState.Off -> 0xffeeeeee.toInt()
         }
         findViewById<View>(R.id.square).setBackgroundColor(color)
-
     }
 
     private fun play() {
         GlobalScope.launch {
-            Sound.play(index)
+            Sound.play(context, index)
         }
     }
 
