@@ -39,15 +39,21 @@ class MainActivity : AppCompatActivity() {
         Handler().postDelayed({
             playColumn(currentColumn)
             currentColumn += 1
-            if (currentColumn == 7) {
+            if (currentColumn == 8) {
                 currentColumn = 0
             }
             startPlaying()
-        }, 1000)
+        }, 500)
 
     }
 
     private fun playColumn(index: Int) {
         columns[index].play()
+        for (x in 0..7) {
+            if (x != index) {
+                columns[x].reset()
+
+            }
+        }
     }
 }

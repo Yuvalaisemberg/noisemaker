@@ -1,6 +1,7 @@
 package com.yuval.noisemaker
 
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import android.widget.LinearLayout
 
@@ -25,5 +26,8 @@ class Column @JvmOverloads constructor(
 
     fun play() {
         setBackgroundColor(0x44ffff00.toInt())
+    }
+    fun reset(){
+        setBackgroundColor(Color.TRANSPARENT)
     }
 }
