@@ -11,7 +11,7 @@ class Cell @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : RelativeLayout(context, attrs, defStyleAttr) {
 
-    private var state: CellState = CellState.Off
+    var state: CellState = CellState.Off
     var index: Int = 0
 
     init {
@@ -23,9 +23,6 @@ class Cell @JvmOverloads constructor(
         state = if (state == CellState.Off) CellState.On else CellState.Off
 
         refreshState()
-        if (state == CellState.On) {
-            play()
-        }
     }
 
     private fun refreshState() {
@@ -36,10 +33,8 @@ class Cell @JvmOverloads constructor(
         findViewById<View>(R.id.square).setBackgroundColor(color)
     }
 
-    private fun play() {
-        GlobalScope.launch {
-            Sound.play(context, index)
-        }
+    fun play() {
+        Sound.play(context, index)
     }
 
     enum class CellState {

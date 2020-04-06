@@ -26,6 +26,11 @@ class Column @JvmOverloads constructor(
 
     fun play() {
         setBackgroundColor(0x44ffff00.toInt())
+        for (cell in cells){
+            if (cell.state==Cell.CellState.On){
+                cell.play()
+            }
+        }
     }
     fun reset(){
         setBackgroundColor(Color.TRANSPARENT)

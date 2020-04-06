@@ -5,6 +5,8 @@ import android.os.Handler
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private var currentColumn = 0
@@ -43,8 +45,7 @@ class MainActivity : AppCompatActivity() {
                 currentColumn = 0
             }
             startPlaying()
-        }, 500)
-
+        }, 300)
     }
 
     private fun playColumn(index: Int) {
