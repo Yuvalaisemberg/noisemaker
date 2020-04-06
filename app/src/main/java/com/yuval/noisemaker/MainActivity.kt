@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
         for (x in 0..7) {
             if (x != index) {
                 columns[x].reset()
-
             }
         }
     }
