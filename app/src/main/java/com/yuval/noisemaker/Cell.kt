@@ -4,14 +4,18 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class Cell @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : RelativeLayout(context, attrs, defStyleAttr) {
 
     var state: CellState = CellState.Off
+        get() = field
+        set(value) {
+            field = value
+            refreshState()
+        }
+
     var index: Int = 0
 
     init {
@@ -21,8 +25,6 @@ class Cell @JvmOverloads constructor(
 
     private fun onClick() {
         state = if (state == CellState.Off) CellState.On else CellState.Off
-
-        refreshState()
     }
 
     private fun refreshState() {
@@ -36,6 +38,15 @@ class Cell @JvmOverloads constructor(
     fun play() {
         Sound.play(context, index)
     }
+
+    fun on() {
+        state = CellState.On
+    }
+
+    fun off() {
+        state = CellState.Off
+    }
+
 
     enum class CellState {
         On,

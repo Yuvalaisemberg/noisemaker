@@ -3,6 +3,7 @@ package com.yuval.noisemaker
 import android.os.Bundle
 import android.os.Handler
 import android.widget.LinearLayout
+import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import kotlinx.coroutines.GlobalScope
@@ -10,13 +11,18 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private var currentColumn = 0
+    private var currentLoop = 0
     private val columns: MutableList<Column> = mutableListOf()
+    private val autoPilotCells: MutableList<Cell> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         createGrid()
+        findViewById<Switch>(R.id.auto_pilot).setOnCheckedChangeListener { buttonView, isChecked ->
+            toggleAutoPilot(isChecked)
+        }
         startPlaying()
     }
 
@@ -43,9 +49,14 @@ class MainActivity : AppCompatActivity() {
             currentColumn += 1
             if (currentColumn == 8) {
                 currentColumn = 0
+                currentLoop += 1
+                if (currentLoop == 2) {
+                    currentLoop = 0
+                    toggleRandomCell()
+                }
             }
             startPlaying()
-        }, 300)
+        }, 100)
     }
 
     private fun playColumn(index: Int) {
@@ -55,6 +66,22 @@ class MainActivity : AppCompatActivity() {
                 columns[x].reset()
 
             }
+        }
+    }
+
+    private fun toggleAutoPilot(isChecked: Boolean) {
+
+    }
+
+    private fun toggleRandomCell() {
+        val column = columns[(0..columns.size - 1).random()]
+        val cell = column.getRandomCell()
+        autoPilotCells.add(cell)
+        cell.on()
+        if (autoPilotCells.size > 10) {
+            val oldestCell = autoPilotCells[0]
+            oldestCell.off()
+            autoPilotCells.removeAt(0)
         }
     }
 }

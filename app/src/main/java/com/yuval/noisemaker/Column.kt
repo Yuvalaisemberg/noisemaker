@@ -26,13 +26,19 @@ class Column @JvmOverloads constructor(
 
     fun play() {
         setBackgroundColor(0x44ffff00.toInt())
-        for (cell in cells){
-            if (cell.state==Cell.CellState.On){
+        for (cell in cells) {
+            if (cell.state == Cell.CellState.On) {
                 cell.play()
             }
         }
     }
-    fun reset(){
+
+    fun reset() {
         setBackgroundColor(Color.TRANSPARENT)
+    }
+
+    fun getRandomCell(): Cell {
+        val offCells = cells.filter { it.state == Cell.CellState.Off }
+        return offCells[(0..offCells.size - 1).random()]
     }
 }
