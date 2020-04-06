@@ -3,21 +3,17 @@ package com.yuval.noisemaker
 import android.content.Context
 import android.media.MediaPlayer
 import android.os.Handler
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class Sound {
     companion object {
         fun play(context: Context, index: Int) {
-//            GlobalScope.launch {
-                val mediaPlayer = MediaPlayer.create(context, SoundFile.getSound(index).file)
+            val mediaPlayer = MediaPlayer.create(context, SoundFile.getSound(index).file)
 
-                Handler().postDelayed({
-                    mediaPlayer.release()
-                }, mediaPlayer.duration.toLong())
+            Handler().postDelayed({
+                mediaPlayer.release()
+            }, mediaPlayer.duration.toLong())
 
-                mediaPlayer.start()
-//            }
+            mediaPlayer.start()
         }
     }
 

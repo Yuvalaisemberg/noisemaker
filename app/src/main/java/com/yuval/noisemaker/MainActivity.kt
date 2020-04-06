@@ -5,9 +5,6 @@ import android.os.Handler
 import android.widget.LinearLayout
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.children
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private var currentColumn = 0
@@ -56,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             startPlaying()
-        }, 100)
+        }, 300)
     }
 
     private fun playColumn(index: Int) {
@@ -73,14 +70,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toggleRandomCell() {
-        val column = columns[(0..columns.size - 1).random()]
-        val cell = column.getRandomCell()
-        autoPilotCells.add(cell)
-        cell.on()
-        if (autoPilotCells.size > 10) {
-            val oldestCell = autoPilotCells[0]
-            oldestCell.off()
-            autoPilotCells.removeAt(0)
+        val columnsByOnCells = columns.groupBy {
+            it.getOnCellsCount()
+        }
+
+        if (columnsByOnCells.size > 0) {
+            val first = columnsByOnCells.keys.sorted().first()
+            val fewestOnCellsColumns = columnsByOnCells[first]!!
+
+            val column = fewestOnCellsColumns[((0..fewestOnCellsColumns.size - 1).random())]
+
+            val cell = column.getRandomCell()
+            autoPilotCells.add(cell)
+            cell.on()
+            if (autoPilotCells.size > 10) {
+                val oldestCell = autoPilotCells[0]
+                oldestCell.off()
+                autoPilotCells.removeAt(0)
+            }
         }
     }
 }

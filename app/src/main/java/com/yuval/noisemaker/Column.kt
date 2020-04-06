@@ -41,4 +41,9 @@ class Column @JvmOverloads constructor(
         val offCells = cells.filter { it.state == Cell.CellState.Off }
         return offCells[(0..offCells.size - 1).random()]
     }
+    fun getOnCellsCount (): Int {
+        val onCells = cells.filter { it.state == Cell.CellState.On }
+        return onCells.size
+
+    }
 }
